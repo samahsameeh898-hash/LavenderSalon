@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://samahsameeh898-hash.github.io/LavenderSalon/sitemap.xml
