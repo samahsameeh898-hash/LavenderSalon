@@ -249,6 +249,76 @@ a {
   letter-spacing: 0.2px;
 }
 
+/* ==========================================================================
+   Samsung-Style Device Edge Lighting (إضاءة حواف الشاشة الناعمة مثل سامسونج)
+   ========================================================================== */
+.samsung-edge-lighting {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  pointer-events: none;
+  z-index: 9998;
+  overflow: hidden;
+  box-sizing: border-box;
+  /* Mask out the center so all page content is crystal clear, only 3.5px border glows */
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 3.5px;
+  animation: samsungEdgeBreathe 4s ease-in-out infinite alternate;
+}
+
+@media (max-width: 680px) {
+  .samsung-edge-lighting {
+    padding: 3px;
+    border-radius: 24px;
+  }
+}
+
+/* Continuous Soft Rotating Conic Neon Beam */
+.edge-glow-rotator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 260vmax;
+  height: 260vmax;
+  transform: translate(-50%, -50%) rotate(0deg);
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 45deg,
+    rgba(192, 132, 252, 0.45) 85deg,
+    rgba(244, 63, 94, 0.95) 120deg,
+    #ffffff 135deg,
+    rgba(192, 132, 252, 0.95) 150deg,
+    rgba(244, 63, 94, 0.45) 185deg,
+    transparent 225deg,
+    transparent 360deg
+  );
+  animation: rotateSamsungGlow 5.5s linear infinite;
+  filter: drop-shadow(0 0 12px rgba(192, 132, 252, 0.95)) drop-shadow(0 0 24px rgba(244, 63, 94, 0.75));
+}
+
+@keyframes rotateSamsungGlow {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes samsungEdgeBreathe {
+  0% {
+    opacity: 0.65;
+    filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.6)) drop-shadow(0 0 14px rgba(244, 63, 94, 0.4));
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 14px rgba(192, 132, 252, 1)) drop-shadow(0 0 28px rgba(244, 63, 94, 0.85));
+  }
+}
+
 /* Ambient Glowing Background Orbs */
 .ambient-glow {
   position: fixed;
@@ -357,16 +427,72 @@ a {
   }
 }
 
-/* Shimmer Top Accent */
+/* Shimmer Top Accent & Samsung Edge Laser Line */
 .luxury-card::before {
   content: "";
   position: absolute;
   top: 0;
-  left: 10%;
-  right: 10%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--lavender-primary), var(--accent-pink), transparent);
+  left: 6%;
+  right: 6%;
+  height: 2.5px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(192, 132, 252, 0.4) 15%, 
+    var(--lavender-primary) 35%, 
+    #ffffff 50%, 
+    var(--accent-pink) 65%, 
+    rgba(244, 63, 94, 0.4) 85%, 
+    transparent 100%);
+  background-size: 200% 100%;
   border-radius: var(--radius-pill);
+  box-shadow: 0 0 14px rgba(192, 132, 252, 0.95), 0 0 6px #ffffff;
+  animation: shimmerLaserSweep 3.5s ease-in-out infinite alternate;
+  z-index: 3;
+}
+
+@keyframes shimmerLaserSweep {
+  0% {
+    background-position: 0% 50%;
+    opacity: 0.75;
+    filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.6));
+  }
+  100% {
+    background-position: 100% 50%;
+    opacity: 1;
+    filter: drop-shadow(0 0 16px rgba(244, 63, 94, 0.95)) drop-shadow(0 0 8px #ffffff);
+  }
+}
+
+/* Samsung Edge Glow on the Card Perimeter */
+.luxury-card::after {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(135deg, 
+    rgba(192, 132, 252, 0.8), 
+    rgba(244, 63, 94, 0.7), 
+    rgba(168, 85, 247, 0.35), 
+    rgba(251, 113, 133, 0.8));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  animation: cardEdgePulse 4s ease-in-out infinite alternate;
+  box-shadow: 0 0 24px rgba(192, 132, 252, 0.4);
+  z-index: 2;
+}
+
+@keyframes cardEdgePulse {
+  0% {
+    opacity: 0.55;
+    filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.5));
+  }
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 16px rgba(244, 63, 94, 0.85)) drop-shadow(0 0 8px rgba(192, 132, 252, 0.9));
+  }
 }
 
 /* ==========================================================================
