@@ -70,6 +70,185 @@ a {
   color: inherit;
 }
 
+/* ==========================================================================
+   Luxury Splash Screen for Barcode / Initial Visit
+   ========================================================================== */
+.luxury-splash {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #0b0813;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+  direction: rtl;
+  text-align: center;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.75s;
+}
+
+.luxury-splash.is-hidden {
+  opacity: 0;
+  transform: scale(1.04);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splash-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  opacity: 0.65;
+}
+
+.splash-glow.glow-1 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.4), transparent 70%);
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.splash-glow.glow-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.3), transparent 70%);
+  bottom: -100px;
+  right: -50px;
+}
+
+.splash-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 380px;
+  width: 100%;
+  gap: 16px;
+}
+
+.splash-flower-badge {
+  font-size: 1.8rem;
+  animation: floatFlower 3s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.6));
+}
+
+@keyframes floatFlower {
+  0% { transform: translateY(0) rotate(-4deg); }
+  100% { transform: translateY(-8px) rotate(4deg); }
+}
+
+.splash-logo-container {
+  width: 100%;
+  max-width: 260px;
+  animation: splashLogoEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes splashLogoEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.82) translateY(18px);
+    filter: blur(8px) drop-shadow(0 0 0 rgba(192, 132, 252, 0));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0px) drop-shadow(0 10px 28px rgba(192, 132, 252, 0.4)) drop-shadow(0 4px 14px rgba(244, 63, 94, 0.3));
+  }
+}
+
+.splash-logo {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.splash-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: splashTextEntrance 1s 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes splashTextEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.splash-welcome-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.2px;
+  line-height: 1.4;
+  text-shadow: 0 2px 14px rgba(192, 132, 252, 0.4);
+}
+
+.splash-welcome-subtitle {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+.splash-loading-wrapper {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 200px;
+  animation: splashTextEntrance 1s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.splash-loading-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(192, 132, 252, 0.16);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  position: relative;
+}
+
+.splash-loading-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--lavender-primary), var(--accent-pink), #ffffff);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 0 10px rgba(192, 132, 252, 0.8), 0 0 4px #ffffff;
+  animation: splashProgressFill 2.1s cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes splashProgressFill {
+  0% { width: 0%; }
+  45% { width: 65%; }
+  100% { width: 100%; }
+}
+
+.splash-loading-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.2px;
+}
+
 /* Ambient Glowing Background Orbs */
 .ambient-glow {
   position: fixed;

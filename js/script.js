@@ -4,6 +4,38 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
+  // --------------------------------------------------------------------------
+  // 1. Luxury Splash Screen for Barcode Scan / Initial Visit
+  // --------------------------------------------------------------------------
+  const splash = document.getElementById("splashScreen");
+  const mainCard = document.getElementById("mainCard");
+
+  if (splash) {
+    const dismissSplash = () => {
+      if (splash.classList.contains("is-hidden")) return;
+      splash.classList.add("is-hidden");
+
+      if (mainCard) {
+        mainCard.style.animation = "none";
+        void mainCard.offsetWidth; // Force reflow
+        mainCard.style.animation = "luxuryCardEntrance 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards";
+      }
+
+      setTimeout(() => {
+        splash.style.display = "none";
+      }, 780);
+    };
+
+    // Auto-dismiss after 2.3 seconds so user enjoys the warm welcome
+    const splashTimer = setTimeout(dismissSplash, 2300);
+
+    // Instant skip on tap/click
+    splash.addEventListener("click", () => {
+      clearTimeout(splashTimer);
+      dismissSplash();
+    });
+  }
+
   const links = document.querySelectorAll(".link-item");
 
   // Web Audio Context for realistic scissor snip sound effect
